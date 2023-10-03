@@ -17,15 +17,11 @@ import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { MatButtonModule } from '@angular/material/button';
-import {ErrorStateMatcher} from '@angular/material/core';
-import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from 'src/environments/environment';
-import { AngularFireModule } from '@angular/fire/compat';
-import {AngularFirestoreModule} from '@angular/fire/compat/firestore'
-// // import {provideHotToastConfig} from '@ngneat/hot-toast';
-// import { HotToastModule } from '@ngneat/hot-toast';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
+
 
 
 @NgModule({
@@ -49,13 +45,11 @@ import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
     MatInputModule,
     MatButtonModule,
     MatFormFieldModule,
-    AngularFireDatabaseModule,
-    AngularFireStorageModule,
-    AngularFirestoreModule,
     MatSnackBarModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
   ],
-  providers: [],//provideHotToastConfig()],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
