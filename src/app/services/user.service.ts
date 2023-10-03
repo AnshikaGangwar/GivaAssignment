@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+//import { AngularFirestore, AngularFirestoreCollection, DocumentData } from '@angular/fire/compat/firestore';
+import { Firestore, collectionData, collection, DocumentData, getDocs, updateDoc, doc } from '@angular/fire/firestore';
 import { User } from '../models/user';
-import { Observable, catchError, tap } from 'rxjs';
+import { Observable, catchError, of, tap, ReplaySubject } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
@@ -9,28 +10,46 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class UserService {
 
-  private usersCollection: AngularFirestoreCollection<any>;
-  public userList$: Observable<User[]>;
+ private _userList$ = new ReplaySubject<User[]>(1);
+ public userList$ = this._userList$.asObservable();
 
-  constructor(private firestore: AngularFirestore, private _snackBar: MatSnackBar) {
-    this.usersCollection = this.firestore.collection('user_1');
-    this.userList$= this.usersCollection.valueChanges({idField: 'docId'}).pipe(
-      tap((usersCollection: any)=>{
-      return usersCollection;
-    }),
-    catchError((error:any)=>{
-      // can add error log using loggers
-      console.log(error);
-      return [];
+
+  constructor(private firestore: Firestore, private _snackBar: MatSnackBar) {
+    this.getData();
+
+   // this.usersCollection = this.firestore.collection('user_1');
+   //const p= collectionData(usersCollection);
+    // this.userList$ = this.userDoc$.pipe(
+    //   tap((userDoc: any)=>{
+    //     console.log(userDoc)
+    //   return usersCollection;
+    // }),
+    // catchError((error:any)=>{
+    //   // can add error log using loggers
+    //   console.log(error);
+    //   return [];
+    // }));
+  }
+
+  getData() {
+    getDocs(collection(this.firestore, 'user_1'))
+    .then((querySnapshot)=>{
+      const userArray=querySnapshot.docs.map((doc)=>{
+        const data = doc.data();
+        return {docId: doc.id, name: data['name'], mail: data['mail'], roles: data['roles'], disabled: data['disabled']}
+      })
+      this._userList$.next(userArray);
     })
-
-    );
+    .catch((error:any)=>{
+        // can add error log using loggers
+        console.log(error);
+    });
   }
 
   updateFieldOfDocument(user: User):void{
-    this.usersCollection.doc(user.docId)
-    .update({disabled: !user.disabled})
+    updateDoc(doc(this.firestore,'user_1/'+user.docId),{disabled: !user.disabled})
     .then(()=>{
+      this.getData();
       this._snackBar.open("User disabled status updated successfully.", "Close");
     })
     .catch((err)=>{
