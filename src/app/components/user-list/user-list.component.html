@@ -1,0 +1,14 @@
+<div *ngIf="userList$ | async as userList" class="user-list-page-container">
+    <mat-card class="user-list-card">
+        <mat-card-header>
+          <mat-card-title><span class="login-page-title">USERS LIST</span></mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <ul class="user-list">
+                <li *ngFor="let user of userList">
+                    <app-user-detail [user]="user"></app-user-detail>
+                </li>
+            </ul>
+        </mat-card-content>
+    </mat-card>
+</div>

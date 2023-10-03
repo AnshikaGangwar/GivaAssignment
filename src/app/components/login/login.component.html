@@ -1,0 +1,38 @@
+<div class="login-page-container">
+    <mat-card class="login-page-card">
+        <mat-card-header>
+          <mat-card-title><span class="login-page-title">Login</span></mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <form class="login-form" [formGroup]="formGroup">
+            <div class="form-field-wrapper">
+                <span class="form-label">Email</span>
+                <mat-form-field appearance="outline">
+                    <input matInput formControlName="email" required>
+                    <mat-error *ngIf="formGroup.controls['email'].hasError('email') && !formGroup.controls['email'].hasError('required')">
+                        Please enter a valid email address
+                    </mat-error>
+                    <mat-error *ngIf="formGroup.controls['email'].hasError('required')">
+                        Email is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-field-wrapper">
+                <span class="form-label">Password</span>
+                <mat-form-field appearance="outline">
+                    <input matInput formControlName="password" required type="password">
+                    <mat-error *ngIf="formGroup.controls['password'].hasError('minlength') && !formGroup.controls['password'].hasError('required')">
+                        Minimum length should be 8
+                    </mat-error>
+                    <mat-error *ngIf="formGroup.controls['password'].hasError('required')">
+                        Password is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+            </div>
+          </form>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="primary" style="background-color: #3d4246;">SIGN IN</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

@@ -1,0 +1,45 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/theming';
+@include mat-core();
+div{
+    span {
+    font-size: 15px;
+    font-family: Avenir Next,sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    color: #3d4246;
+    line-height: 1.5;
+}
+}
+.mat-mdc-raised-button{
+    text-decoration: none;
+    text-align: center;
+    background-color: #3d4246;
+    padding: 10px 18px;
+    span{
+        color:#fff;
+    font-family: Avenir Next,sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+}
+}
+ul {
+    list-style-type: none;
+  }
+
+.mat-mdc-form-field-flex{
+    height: 2rem;
+}
+
+.mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-bottom: 1rem;
+}
+
+.mat-mdc-form-field-input-control{
+    margin-top: 3.5px;
+}
+.mat-mdc-snack-bar-container .mdc-snackbar__surface {
+    background-color: rgb(217, 226, 217) !important;
+}

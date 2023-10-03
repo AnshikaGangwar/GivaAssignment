@@ -1,0 +1,39 @@
+.login-page-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .login-page-card{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color:#fcfafa ;
+        border-radius: 0.2rem;
+        margin:2rem 0;
+        padding: 1rem 1rem 2rem 1rem;
+    }
+    .login-page-title{
+        font-size: 2rem;
+    }
+    .login-form{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .form-field-wrapper{
+            display: flex;
+            flex-direction: column;
+            padding: 0.5rem;
+            margin-bottom: 0.5rem;
+            width: 30rem;
+            .form-label{
+               margin-bottom: 0.5rem;
+            }
+        }
+    }
+}
+.mat-card-header.mat-card-header {
+    justify-content: center;
+}
+

@@ -1,0 +1,16 @@
+<mat-card *ngIf="user" class="user-deatil-card">
+    <div class="user-detail-wrapper">
+        <span class="user-detail-label">Email</span>
+        <span class="user-detail-value">{{user.mail}}</span>
+    </div>
+    <div class="user-detail-wrapper">
+        <span class="user-detail-label">Name</span>
+        <span class="user-detail-value">{{user.name}}</span>
+    </div>
+    <div class="user-detail-wrapper">
+        <span class="user-detail-label">Roles</span>
+        <span class="user-detail-value" *ngFor="let role of user.roles">{{role}}</span>
+    </div>
+    <button mat-raised-button *ngIf="user.disabled" class="user-action-button" (click)="updateDisabledUserStatus(user)" style="background:rgb(109, 255, 141);">ENABLE USER</button>
+    <button mat-raised-button *ngIf="!user.disabled" class="user-action-button" (click)="updateDisabledUserStatus(user)" style="background:pink;">DISABLE USER</button>
+</mat-card>

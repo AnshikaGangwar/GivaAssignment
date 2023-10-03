@@ -1,0 +1,14 @@
+.user-list-page-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    .user-list-card{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-shadow: none;
+        
+    }
+}
